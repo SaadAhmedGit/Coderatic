@@ -3,32 +3,38 @@ const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
+const { exec } = require('child_process')
 
-var app = express();
-const indexPath = path.join(__dirname, '../public/index.html');
-const staticPath = path.join(__dirname, '../public');
-app.use(express.static(staticPath));
+var app = express()
+const indexPath = path.join(__dirname, '../public/index.html')
+const staticPath = path.join(__dirname, '../public')
+app.use(express.static(staticPath))
 
 
 app.get('/', function (req, res) {
-    res.sendFile(indexPath);
+    res.sendFile(indexPath)
 });
 
 
 app.post('/', function (req, res) {
-    var form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm({ hashAlgorithm: 'sha256' })
+    form.parse(req)
 
-    form.parse(req);
-
-    form.on('fileBegin', function (name, file) {
-        const u_id = crypto.createHmac('sha256', file.originalFilename).digest('base64');
-        const ext = path.extname(file.originalFilename);
-        let newPath = path.join(__dirname, '../uploads/' + u_id + ext);
-        file.filepath = newPath;
-    });
+    form.on('fileBegin', function (name, file) { });
 
     form.on('file', function (name, file) {
-        console.log('Uploaded ' + file.originalFilename);
+        const ext = path.extname(file.originalFilename)
+        const new_path = path.join(__dirname, '../public/uploads/' + file.hash)
+        fs.rename(file.filepath, new_path + ext, (err) => { if (err) console.error(`ERROR: ${err}`) });
+        file.filepath = new_path
+        console.log('Uploaded ' + file.hash)
+        if (ext === '.cpp') {
+            exec(`g++ -O2 -std=c++17 "${file.filepath}.cpp" -o "${file.filepath}"`, (err, stdout, stderr) => {
+                if (err) console.error(`ERROR: ${err}`)
+                else if (stderr) console.log(`stderr: ${stderr}`)
+                else if (stdout) console.log(`stdout: ${stdout}`)
+            })
+        }
     });
     res.sendFile(indexPath);
 });
