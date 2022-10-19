@@ -1,5 +1,4 @@
 const express = require('express')
-const crypto = require('crypto')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
@@ -15,14 +14,10 @@ app.get('/', function (req, res) {
     res.sendFile(indexPath)
 });
 
-
-app.post('/', function (req, res) {
+app.post('/', (req, res) => {
     var form = new formidable.IncomingForm({ hashAlgorithm: 'sha256' })
     form.parse(req)
-
-    form.on('fileBegin', function (name, file) { });
-
-    form.on('file', function (name, file) {
+    form.on('file', (name, file) => {
         const ext = path.extname(file.originalFilename)
         const new_path = path.join(__dirname, '../public/uploads/' + file.hash)
         fs.rename(file.filepath, new_path + ext, (err) => { if (err) console.error(`ERROR: ${err}`) });
@@ -33,6 +28,7 @@ app.post('/', function (req, res) {
                 if (err) console.error(`ERROR: ${err}`)
                 else if (stderr) console.log(`stderr: ${stderr}`)
                 else if (stdout) console.log(`stdout: ${stdout}`)
+                exec(`"${file.filepath}"`, (stdout) => { if (stdout) console.log(stdout) });
             })
         }
     });
