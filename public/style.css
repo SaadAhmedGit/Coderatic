@@ -45,3 +45,15 @@ body{
     background-color: greenyellow !important;
     color: black;
 }
+
+
+#editor { 
+    height: 600px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    border-bottom-right-radius: 0px;
+}
