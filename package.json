@@ -17,12 +17,11 @@
   },
   "homepage": "https://github.com/SaadAhmedGit/Coderatic#readme",
   "dependencies": {
-    "crypto": "^1.0.1",
     "express": "^4.18.2",
-    "formidable": "^2.0.1",
-    "nodemon": "^2.0.20"
+    "formidable": "^2.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.25.0"
+    "eslint": "^8.25.0",
+    "nodemon": "^2.0.20"
   }
 }
