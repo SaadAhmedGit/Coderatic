@@ -36,7 +36,15 @@
               <div id="editor"></div>
             </div>
 
-            <form action="/" enctype="multipart/form-data" method="post">
+            <form id="hidden_form" action="http://localhost:5000/ace"  method="post">
+              <input
+                id="temp_code_area"
+                type="hidden"
+                name="mycode"
+                value="a"
+              />
+            </form>
+            <form action="http://localhost:5000/file" enctype="multipart/form-data" method="post">
               <div class="form-group">
                 <div>
                   <label
@@ -55,18 +63,17 @@
                   />
                 </div>
                 <div class="col-lg-12 text-center btn-submit">
+                  <button
+                    name="codefile"
+                    class="btn btn-outline-light btn-lg submit-button"  
+                   
+                  >
+                    Submit File
+                  </button>
                 </div>
               </div>
             </form> 
 
-            <form id="hidden_form" action="http://localhost:5000/ace"  method="post">
-              <input
-                id="temp_code_area"
-                type="hidden"
-                name="mycode"
-                value="a"
-              />
-            </form>
 
             <div class="col-lg-12 text-center btn-submit">
               <button

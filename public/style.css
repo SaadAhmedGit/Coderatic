@@ -40,6 +40,9 @@ body{
     color: white;
     font-family: 'Montserrat',sans-serif;
 }
+.submit-button{
+    margin: 0 2%;
+}
 
 .submit-button:hover{
     background-color: greenyellow !important;

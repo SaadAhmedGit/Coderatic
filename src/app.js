@@ -31,12 +31,13 @@ app.post('/ace', function (request, response, next){
         if (err) throw err;
         console.log('Saved!');
       });
+      const ext = '.cpp';
       if (ext === '.cpp') {
             exec(`g++ -O2 -std=c++17 "${new_path}.cpp" -o "${new_path}"`, (err, stdout, stderr) => {
                 if (err) console.error(`ERROR: ${err}`)
                 else if (stderr) console.log(`stderr: ${stderr}`)
                 else if (stdout) console.log(`stdout: ${stdout}`)
-                exec(`"${file.filepath}"`, (stdout) => { if (stdout) console.log(stdout) });
+                exec(`"${new_path}"`, (stdout) => { if (stdout) console.log(stdout) });
             })   
         }
     response.sendFile(indexPath);
