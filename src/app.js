@@ -12,7 +12,7 @@ const staticPath = path.join(__dirname, '../public')
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.use(express.static(staticPath))
+app.use(express.static(staticPath));
 
 function hash(string) {
     return createHash('sha256').update(string).digest('hex');
