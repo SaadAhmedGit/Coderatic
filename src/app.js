@@ -13,25 +13,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(express.static(staticPath));
-
+app.engine('html', require('ejs').renderFile);
 function hash(string) {
     return createHash('sha256').update(string).digest('hex');
 }
 
 
 app.get('/', function (req, res) {
-    res.sendFile(indexPath)
+    res.render(indexPath , {codeBody: ""})
 });
 
 app.post('/ace', function (request, response, next){
     var fileHash = hash(request.body.mycode)
+    let ext = request.body.ext
     console.log(fileHash)
         const new_path = path.join(__dirname, '../public/uploads/' + fileHash)
-        fs.writeFile(new_path +'.cpp', request.body.mycode , function (err) {
+        fs.writeFile(new_path +ext, request.body.mycode , function (err) {
         if (err) throw err;
         console.log('Saved!');
       });
-      const ext = '.cpp';
       if (ext === '.cpp') {
             exec(`g++ -O2 -std=c++17 "${new_path}.cpp" -o "${new_path}"`, (err, stdout, stderr) => {
                 if (err) console.error(`ERROR: ${err}`)
@@ -39,8 +39,12 @@ app.post('/ace', function (request, response, next){
                 else if (stdout) console.log(`stdout: ${stdout}`)
                 exec(`"${new_path}"`, (stdout) => { if (stdout) console.log(stdout) });
             })   
+        }else{
+            console.log(ext + "File recieved")
         }
-    response.sendFile(indexPath);
+    response.render(indexPath);
+
+        
 });
 
 app.post('/file', function(request, response){
@@ -61,7 +65,7 @@ app.post('/file', function(request, response){
             })   
         }
     });
-    response.sendFile(indexPath);
+    response.render(indexPath);
 })
 
 const PORT = 5000

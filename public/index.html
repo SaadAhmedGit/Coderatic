@@ -38,7 +38,7 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script>
-      var selectedLang = "Select Language"
+      var selectedLang = "Select Language";
     </script>
   </head>
 
@@ -56,6 +56,7 @@
               id="hidden_form"
               action="http://localhost:5000/ace"
               method="post"
+              target="editor"
             >
               <input
                 id="temp_code_area"
@@ -63,9 +64,11 @@
                 name="mycode"
                 value="a"
               />
+              <input id="temp_extention" type="hidden" name="ext" value="" />
             </form>
+
             <div>
-              <div class="dropdown" style="margin: 2% 0; text-align: end;">
+              <div class="dropdown langSelect">
                 <button
                   class="btn btn-outline-light dropdown-toggle"
                   type="button"
@@ -73,16 +76,29 @@
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
-                  
                 >
                   Language Select
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <button class="dropdown-item" type="button" onclick="selectedLand = C++">C++</button>
-                  <button class="dropdown-item" type="button">
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    onclick="changeLang('C++', 'c_cpp','.cpp')"
+                  >
+                    C++
+                  </button>
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    onclick="changeLang('Python', 'python','.py')"
+                  >
                     Python
                   </button>
-                  <button class="dropdown-item" type="button">
+                  <button
+                    class="dropdown-item"
+                    type="button"
+                    onclick="changeLang('JavaScript','javascript','.js')"
+                  >
                     JavaScript
                   </button>
                 </div>
@@ -93,14 +109,8 @@
               enctype="multipart/form-data"
               method="post"
             >
-              <div class="form-group">
-                <div>
-                  <label
-                    for="formFileLg"
-                    class="form-label"
-                    style="padding: 2% 0%"
-                    >or upload a .cpp file</label
-                  >
+              <div class="row" style="margin: 2% 0">
+                <div class="col-lg-10" style="padding: 0">
                   <input
                     name="codefile"
                     enctype="multipart/form-data"
@@ -110,9 +120,10 @@
                     style="background-color: rgb(41, 41, 41); color: white"
                   />
                 </div>
-                <div class="col-lg-12 text-center btn-submit">
+                <div class="col-lg-2" style="text-align: end; padding: 0">
                   <button
                     name="codefile"
+                    id="filesubmit"
                     class="btn btn-outline-light btn-lg submit-button"
                   >
                     Submit File
@@ -141,10 +152,10 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.12.3/ext-language_tools.min.js"></script>
     <script>
+      document.getElementById("dropdownMenu2").innerHTML = selectedLang;
       ace.require("ace/ext/language_tools");
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
-      editor.session.setMode("ace/mode/c_cpp");
       editor.setOptions({
         autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
@@ -153,15 +164,26 @@
         enableLiveAutocompletion: true,
       });
       editor.setShowPrintMargin(false);
-      function postToURL(v) {
-        document.getElementById("temp_code_area").value = v;
-        document.getElementById("hidden_form").submit();
+      function postToURL(acecode) {
+        document.getElementById("temp_code_area").value = acecode;
+        if (document.getElementById("temp_extention").value === "") {
+          alert("Please select a language before uploading!");
+        } else {
+          document.getElementById("hidden_form").submit();
+        }
+      }
+      function changeLang(language, aceLang, extention) {
+        selectedLang = language;
+        document.getElementById("dropdownMenu2").innerHTML = selectedLang;
+        document.getElementById("temp_extention").value = extention;
+        editor.session.setMode("ace/mode/" + aceLang);
       }
     </script>
     <script>
       $(document).ready(function () {
         $(".dropdown-toggle").dropdown();
       });
+      
     </script>
   </body>
 </html>

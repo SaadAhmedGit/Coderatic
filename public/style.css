@@ -40,15 +40,18 @@ body{
     color: white;
     font-family: 'Montserrat',sans-serif;
 }
-.submit-button{
-    margin: 0 2%;
-}
+
 
 .submit-button:hover{
     background-color: greenyellow !important;
     color: black;
 }
 
+
+.langSelect{
+    margin: 2% 0 0 0; 
+    text-align: end;
+}
 
 #editor { 
     height: 600px;
