@@ -15,15 +15,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(staticPath));
 app.engine('html', require('ejs').renderFile);
 function hash(string) {
-    return createHash('sha256').update(string).digest('hex');
+    return  createHash('sha256').update(string).digest('hex');
 }
 
 
 app.get('/', function (req, res) {
-    res.render(indexPath , {codeBody: ""})
+    res.render(indexPath)
 });
 
-app.post('/ace', function (request, response, next){
+app.post('/', function (request, response, next){
     var fileHash = hash(request.body.mycode)
     let ext = request.body.ext
     console.log(fileHash)

@@ -54,7 +54,7 @@
 
             <form
               id="hidden_form"
-              action="http://localhost:5000/ace"
+              action="http://localhost:5000/"
               method="post"
               target="editor"
             >
@@ -183,7 +183,13 @@
       $(document).ready(function () {
         $(".dropdown-toggle").dropdown();
       });
-      
+      window.onload = function () {
+        var name = localStorage.getItem("code");
+        if (name !== null) $("#editor").innerHTML("code");
+      };
+      window.onbeforeunload = function () {
+        localStorage.setItem("code", $("#editor").innerHTML());
+      };
     </script>
   </body>
 </html>
