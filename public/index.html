@@ -54,7 +54,7 @@
 
             <form
               id="hidden_form"
-              action="http://localhost:5000/"
+              action="http://localhost:5000/ace"
               method="post"
               target="editor"
             >
@@ -151,45 +151,6 @@
       charset="utf-8"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.12.3/ext-language_tools.min.js"></script>
-    <script>
-      document.getElementById("dropdownMenu2").innerHTML = selectedLang;
-      ace.require("ace/ext/language_tools");
-      var editor = ace.edit("editor");
-      editor.setTheme("ace/theme/monokai");
-      editor.setOptions({
-        autoScrollEditorIntoView: true,
-        copyWithEmptySelection: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true,
-      });
-      editor.setShowPrintMargin(false);
-      function postToURL(acecode) {
-        document.getElementById("temp_code_area").value = acecode;
-        if (document.getElementById("temp_extention").value === "") {
-          alert("Please select a language before uploading!");
-        } else {
-          document.getElementById("hidden_form").submit();
-        }
-      }
-      function changeLang(language, aceLang, extention) {
-        selectedLang = language;
-        document.getElementById("dropdownMenu2").innerHTML = selectedLang;
-        document.getElementById("temp_extention").value = extention;
-        editor.session.setMode("ace/mode/" + aceLang);
-      }
-    </script>
-    <script>
-      $(document).ready(function () {
-        $(".dropdown-toggle").dropdown();
-      });
-      window.onload = function () {
-        var name = localStorage.getItem("code");
-        if (name !== null) $("#editor").innerHTML("code");
-      };
-      window.onbeforeunload = function () {
-        localStorage.setItem("code", $("#editor").innerHTML());
-      };
-    </script>
+    <script src="preferences.js"></script>
   </body>
 </html>

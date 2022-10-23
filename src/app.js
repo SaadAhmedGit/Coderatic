@@ -42,9 +42,7 @@ app.post('/', function (request, response, next){
         }else{
             console.log(ext + "File recieved")
         }
-    response.render(indexPath);
-
-        
+    
 });
 
 app.post('/file', function(request, response){
