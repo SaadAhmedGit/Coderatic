@@ -42,7 +42,8 @@ app.post('/', function (request, response, next){
         }else{
             console.log(ext + "File recieved")
         }
-    
+    response.sendStatus(200)
+
 });
 
 app.post('/file', function(request, response){

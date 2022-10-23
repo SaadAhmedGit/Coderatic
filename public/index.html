@@ -38,6 +38,8 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script>
+      
+
       var selectedLang = "Select Language";
     </script>
   </head>
@@ -138,7 +140,13 @@
                 class="btn btn-outline-light btn-lg submit-button"
                 onclick="postToURL(editor.getValue())"
               >
-                Submit Code
+                <span
+                  class="spinner-border spinner-border-sm"
+                  id="statusIndicator"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Submit Code</span>
               </button>
             </div>
           </div>
