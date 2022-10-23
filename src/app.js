@@ -38,12 +38,11 @@ app.post('/', function (request, response, next){
                 else if (stderr) console.log(`stderr: ${stderr}`)
                 else if (stdout) console.log(`stdout: ${stdout}`)
                 exec(`"${new_path}"`, (stdout) => { if (stdout) console.log(stdout) });
-            })   
+            })
         }else{
             console.log(ext + "File recieved")
         }
     response.sendStatus(200)
-
 });
 
 app.post('/file', function(request, response){

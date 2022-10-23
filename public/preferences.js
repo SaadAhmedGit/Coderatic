@@ -36,6 +36,8 @@ let postToURL = (acecode) => {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("statusIndicator").style.display = "none";
                 console.log("File submitted!")
+                let prev = document.getElementById("submissions").innerHTML;
+                document.getElementById("submissions").innerHTML = '<p>Code Submitted Successsdsddfully!!</p>' 
            }
           };
           xhr.open("POST", "http://localhost:5000/", true);
