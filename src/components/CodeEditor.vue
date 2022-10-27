@@ -2,19 +2,33 @@
   <div class="editor_binding_class">
     <div id="editor"></div>
   </div>
+  <div id="centerContained">
+    <SubmitButton
+      text="Submit Code"
+      ButtonFunction="submitCode"
+      @submit="$emit('submitCode', editor.getValue())"
+    >
+    </SubmitButton>
+  </div>
+  <h1>{{ text }}</h1>
 </template>
 
 <script>
 import ace from "ace-builds";
+import SubmitButton from "./MyButton.vue";
 export default {
   name: "CodeEditor",
   props: {
     theme: String,
     lang: String,
   },
+  components: {
+    SubmitButton,
+  },
   data() {
     return {
       editor: "",
+      text: "",
     };
   },
   mounted() {
@@ -43,7 +57,6 @@ export default {
   font-size: large;
   left: 0;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  border-bottom-right-radius: 0px;
+  border-radius: 10px;
 }
 </style>

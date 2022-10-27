@@ -1,29 +1,36 @@
 <template>
 <div id="container">
-    <div id="title">
+    <div id="centerContained">
     <h1>Coderatic</h1>
-  </div>
-<CodeEditor lang="c_cpp" theme="monokai"></CodeEditor>
+</div>
+<CodeEditor :lang="language" :theme="setTheme" @submitCode="sendCode"></CodeEditor>
 </div>
 </template>
 
 <script>
+
 import CodeEditor from "./CodeEditor.vue";
 export default{
     name: "SubmissionPage",
     components:{
         CodeEditor,
+    },
+    data(){
+        return{
+            language: "c_cpp",
+            setTheme: "dracula",
+            submit: false
+        }
+    },
+    methods:{
+        sendCode(code){
+            this.$emit('submitCode', code)
+        }
     }
 }
 
 </script>
 
 <style>
-#container{
-    padding: 3% 15%;
-}
-#title{
-    text-align: center;
-    padding: 1% 0 1% 0;
-}
+
 </style>
