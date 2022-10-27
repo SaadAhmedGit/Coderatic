@@ -4,34 +4,32 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import ace from "ace-builds";
 export default {
   name: "CodeEditor",
   props: {
-    options: Object,
     theme: String,
+    lang: String,
   },
   data() {
     return {
       editor: "",
     };
   },
-  mounted: function () {
+  mounted() {
     ace.require("ace/ext/language_tools");
-    var editor = ace.edit("editor");
-    editor.setShowPrintMargin(false);
-    this.setoptions()   
-    this.settheme()   
- 
-  },
-  methods: {
-    setoptions() {
-        this.editor.setOptions(this.options)
-    },
-    settheme() {
-        this.editor.setTheme("ace/theme/"+this.theme);
-    },
+    this.editor = ace.edit("editor");
+    this.editor.setShowPrintMargin(false);
+    this.editor.setTheme("ace/theme/" + this.theme);
+    this.editor.session.setMode("ace/mode/" + this.lang);
+    this.editor.setOptions({
+      autoScrollEditorIntoView: true,
+      copyWithEmptySelection: true,
+      enableBasicAutocompletion: true,
+      enableSnippets: true,
+      enableLiveAutocompletion: true,
+    });
   },
 };
 </script>

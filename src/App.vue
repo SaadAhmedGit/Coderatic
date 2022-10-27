@@ -1,9 +1,9 @@
 <template>
   <CodeEditor
     v-bind:options="options"
-      theme="monokai"
+    theme="monokai"
+    lang="c_cpp"
   ></CodeEditor>
-  
 </template>
 
 <script>
@@ -13,18 +13,19 @@ export default {
   components: {
     CodeEditor,
   },
-  data(){
-   return{
-    options:{
-      type: Object,
-      default: {
-        autoScrollEditorIntoView: true,
+  data() {
+    return {
+      options: {
+        type: Object,
+        default: {
+      autoScrollEditorIntoView: true,
         copyWithEmptySelection: true,
-        enableBasicAutocompletion: true,
-        enableSnippets: true,
-        enableLiveAutocompletion: true
-      }
-    }
+          enableBasicAutocompletion: true,
+            enableSnippets: true,
+              enableLiveAutocompletion: true
+    
+  }
+}
    }
   }
 };
