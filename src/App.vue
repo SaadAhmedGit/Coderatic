@@ -1,16 +1,17 @@
 <template>
-  <CodeEditor
-    theme="monokai"
-    lang="c_cpp"
-  ></CodeEditor>
+  <SubmissionPage></SubmissionPage>
 </template>
 
 <script>
-import CodeEditor from "./components/CodeEditor.vue";
+import SubmissionPage from "./components/SubmissionPage.vue";
 export default {
   name: "App",
   components: {
-    CodeEditor,
-  }
+    SubmissionPage,
+  },
 };
 </script>
+
+<style>
+
+</style>
