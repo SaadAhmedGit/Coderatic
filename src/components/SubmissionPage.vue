@@ -18,7 +18,7 @@ export default{
     data(){
         return{
             language: "c_cpp",
-            setTheme: "dracula",
+            setTheme: "monokai",
             submit: false
         }
     },

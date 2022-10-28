@@ -27,6 +27,5 @@ export default {
 .container-fluid{
     padding: 3% 15%;
     height: 90%;
-
 }
 </style>
