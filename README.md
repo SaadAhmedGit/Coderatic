@@ -1,6 +1,6 @@
 # Coderatic (Vue Port)
 
-This is an experimental branch for porting porting Coderatic's current codebase to use Vue.js
+This is an experimental branch for porting Coderatic's current codebase to use Vue.js
 
 ## Project setup
 ```
