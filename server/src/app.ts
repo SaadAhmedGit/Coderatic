@@ -14,5 +14,5 @@ app.get("/server", (req: Request, res: Response) => {
 });
 
 app.listen(process.env.PORT || 8081, () => {
-  console.log("Server is running on port 8081");
+  console.log(`Server is up and running at http://localhost:${process.env.PORT || 8081}/`);
 });
